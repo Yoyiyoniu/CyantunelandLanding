@@ -1,0 +1,27 @@
+---
+import { Image } from "astro:assets";
+import Go from "../assets/icons/Go.astro";
+
+interface Props {
+    image: any;
+    title: string;
+    description: string;
+}
+
+const { image, title, description} = Astro.props;
+
+---
+
+<div class="border-white bg-white rounded-lg p-1 max-w-sm mx-auto">
+    <a href="/" class="relative group">
+        <Image class="rounded-t-md group-hover:blur-sm transition duration-300" src={image} alt="any context jiji" />
+        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <Go />
+        </div>
+    </a>
+    <div class="bg-white w-full h-1"></div>
+    <div class="bg-slate-950 rounded-b-md p-1">
+        <h2 class="text-[22px] mb-2">{title}</h2>
+        <p class="text-[px]">{description}</p>
+    </div>
+</div>
