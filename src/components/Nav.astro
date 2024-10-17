@@ -1,0 +1,19 @@
+---
+import PopButton from "../components/PupButton.astro";
+---
+
+<nav class="flex justify-between p-5 text-[25px]">
+  <ul class="list-none flex gap-5">
+    <li><a href="/">Inicio</a></li>
+    <li><a href="/blog">Blog</a></li>
+    <li><a href="https://shop.cyantunieland.net">Tienda</a></li>
+  </ul>
+  <PopButton message="Se ha copiado la ip al portapapeles!">
+    <p
+      id="copy-ip"
+      class="border-white p-1 rounded-lg font-bold bg-gradient-to-l from-[#9BCFFF] via-[#C39BDB] to-[#9BCFFF] text-transparent bg-clip-text animate-gradient"
+    >
+      play.cyantunieland.net
+    </p>
+  </PopButton>
+</nav>

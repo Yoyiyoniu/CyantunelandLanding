@@ -1,0 +1,93 @@
+---
+const isVisible = false;
+
+const { message } = Astro.props;
+---
+
+<button class="show-button">
+  <slot />
+</button>
+
+<div class={`popup ${isVisible ? "visible bounce-in" : ""}`}>
+  {message}
+</div>
+
+<style>
+  .popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: none;
+    transform: translateX(100%);
+    transition: transform 0.2s ease-in-out;
+  }
+  .popup.visible {
+    display: block;
+    transform: translateX(0);
+  }
+  .popup.bounce-in {
+    animation: bounceIn 0.3s forwards;
+  }
+  .popup.bounce-out {
+    animation: bounceOut 0.3s forwards;
+  }
+  @keyframes bounceIn {
+    0% {
+      transform: translateX(100%);
+    }
+    60% {
+      transform: translateX(-5%);
+    }
+    80% {
+      transform: translateX(3%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  @keyframes bounceOut {
+    0% {
+      transform: translateX(0);
+    }
+    20% {
+      transform: translateX(-5%);
+    }
+    40% {
+      transform: translateX(3%);
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  const showMessage = () => {
+    const popup = document.querySelector(".popup");
+    if (popup) {
+      popup.classList.remove("bounce-out");
+      popup.classList.add("visible");
+      popup.classList.add("bounce-in");
+      setTimeout(() => {
+        popup.classList.remove("bounce-in");
+        popup.classList.add("bounce-out");
+        setTimeout(() => {
+          popup.classList.remove("visible");
+        }, 500); // Duración de la animación de salida
+      }, 3000); // Duración de la visibilidad del popup
+    }
+  };
+
+  const showButton = document.querySelector(".show-button");
+  if (showButton) {
+    showButton.addEventListener("click", showMessage);
+  }
+</script>
